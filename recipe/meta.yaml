@@ -7,21 +7,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/illusionist-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/illusionist-{{ version }}.tar.gz
   sha256: c6a906216705b3b56aaa9e3ceeb4e24671f5b7497bb7058fb4a4d7b12f897f05
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - python >=3.6,<4.0
+    - python {{ python_min }}
     - pip
     - poetry
   run:
-    - python >=3.6,<4.0
+    - python >={{ python_min }},<4.0
     - ipywidgets >=7.6.5,<8.0.0
     - nbclient >=0.5.0
     - nbconvert >=6.2.0,<7
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/danielfrg/illusionist
